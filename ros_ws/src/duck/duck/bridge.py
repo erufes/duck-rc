@@ -1,3 +1,6 @@
+import rclpy
+from rclpy.node import Node
+
 def main():
     print('Hi from duck.')
 
