@@ -1,4 +1,5 @@
 import rclpy
+import serial
 from rclpy.node import Node
 from geometry_msgs.msg import TwistStamped
 
@@ -15,13 +16,15 @@ class DS4Subscriber(Node):
 
 
 def main():
-    print("Hi from bridge")
+    ser = serial.Serial('/dev/ttyUSB0')
+    print(ser.name)
+    ser.write(b"HELLO!")
     rclpy.init(args=None)
-    print("Creating sub...")
     sub = DS4Subscriber()
     rclpy.spin(sub)
     sub.destroy_node()
     rclpy.shutdown()
+    ser.close()
 
 
 if __name__ == '__main__':
