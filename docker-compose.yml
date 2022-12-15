@@ -1,0 +1,33 @@
+version: "3.3"
+services:
+  ds4_driver:
+    container_name: ds4_driver
+    network_mode: host
+    privileged: true
+    image: erus/ds4_driver
+    build:
+      context: ./containers/ds4_driver
+      dockerfile: Dockerfile
+    restart: always
+  duck_bridge:
+    container_name: duck_bridge
+    volumes:
+      - ./ros_ws:/root/ros_ws
+    image: duck_bridge
+    build:
+      context: ./containers/duck_bridge
+      dockerfile: Dockerfile
+    restart: "no"
+    depends_on:
+        - ds4_driver
+  duck_tools:
+    container_name: duck_tools
+    volumes:
+      - ./ros_ws:/root/ros_ws
+    image: osrf/ros:humble-desktop
+    restart: "always"
+    command: tail -F /dev/null
+    depends_on:
+        - ds4_driver
+    environment:
+      - 'DISPLAY=host.docker.internal:0.0'
