@@ -15,7 +15,7 @@ class DS4Subscriber(Node):
 
     def listener_callback(self, msg: TwistStamped):
         controlObject = {'x': msg.twist.linear.x, 'y': msg.twist.linear.z}
-        self.get_logger().info(controlObject)
+        self.get_logger().info(json.dumps(controlObject))
         self._serial.write(json.dumps(controlObject).encode('ascii'))
 
     def close_serial(self):
