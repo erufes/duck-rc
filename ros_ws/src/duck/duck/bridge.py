@@ -16,7 +16,10 @@ class DS4Subscriber(Node):
     def listener_callback(self, msg: TwistStamped):
         controlObject = {'x': msg.twist.linear.y, 'y': msg.twist.linear.z}
         self.get_logger().info(json.dumps(controlObject))
-        self._serial.write(json.dumps(controlObject).encode('ascii'))
+        if (self._serial.isOpen()):
+            self._serial.write(json.dumps(controlObject).encode('ascii'))
+        else:
+            self.get_logger().info('[ERROR] Serial port is not open')
 
     def close_serial(self):
         self._serial.close()
