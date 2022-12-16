@@ -14,7 +14,7 @@ class DS4Subscriber(Node):
         self.get_logger().info('DS4 Bridge created successfully')
 
     def listener_callback(self, msg: TwistStamped):
-        controlObject = {'x': msg.twist.linear.x, 'y': msg.twist.linear.z}
+        controlObject = {'x': msg.twist.linear.y, 'y': msg.twist.linear.z}
         self.get_logger().info(json.dumps(controlObject))
         self._serial.write(json.dumps(controlObject).encode('ascii'))
 
