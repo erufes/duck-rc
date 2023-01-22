@@ -27,8 +27,8 @@ void Motor::tick() { analogWrite(this->power, this->curSpeed); }
 void Motor::updateDirectionPins() {
   switch (direction) {
   case FORWARD:
-    digitalWrite(this->directionA, HIGH);
-    digitalWrite(this->directionB, LOW);
+    digitalWrite(this->directionA, LOW);
+    digitalWrite(this->directionB, HIGH);
     break;
   case BACKWARD:
     digitalWrite(this->directionA, LOW);

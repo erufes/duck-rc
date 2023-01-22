@@ -1,0 +1,60 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "/home/pietroluongo/arduino/include",
+                "/home/pietroluongo/arduino/src",
+                "/home/pietroluongo/arduino/lib/motor",
+                "/home/pietroluongo/arduino/.pio/libdeps/megaatmega2560/ArduinoJson/src",
+                "/home/pietroluongo/.platformio/packages/framework-arduino-avr/cores/arduino",
+                "/home/pietroluongo/.platformio/packages/framework-arduino-avr/variants/mega",
+                "/home/pietroluongo/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                "/home/pietroluongo/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                "/home/pietroluongo/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                "/home/pietroluongo/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                "/home/pietroluongo/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/home/pietroluongo/arduino/include",
+                    "/home/pietroluongo/arduino/src",
+                    "/home/pietroluongo/arduino/lib/motor",
+                    "/home/pietroluongo/arduino/.pio/libdeps/megaatmega2560/ArduinoJson/src",
+                    "/home/pietroluongo/.platformio/packages/framework-arduino-avr/cores/arduino",
+                    "/home/pietroluongo/.platformio/packages/framework-arduino-avr/variants/mega",
+                    "/home/pietroluongo/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                    "/home/pietroluongo/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                    "/home/pietroluongo/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                    "/home/pietroluongo/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                    "/home/pietroluongo/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60105",
+                "ARDUINO_AVR_MEGA2560",
+                "F_CPU=16000000L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10808",
+                "__AVR_ATmega2560__",
+                ""
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "compilerPath": "/home/pietroluongo/.platformio/packages/toolchain-atmelavr/bin/avr-gcc",
+            "compilerArgs": [
+                "-mmcu=atmega2560",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
