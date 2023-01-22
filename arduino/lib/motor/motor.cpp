@@ -4,10 +4,15 @@ void handleSpeedOverflow(int &speed);
 void setDirectionFromSpeed(int &speed, uint8_t &direction);
 
 Motor::Motor(uint8_t directionA, uint8_t directionB, uint8_t power)
-    : directionA(directionA), directionB(directionB), power(power) {
+    // : directionA(directionA), directionB(directionB), power(power) {
+      {
   pinMode(this->directionA, OUTPUT);
   pinMode(this->directionB, OUTPUT);
   pinMode(this->power, OUTPUT);
+
+  this->directionA = directionA;
+  this->directionB = directionB;
+  this->power = power;
 
   digitalWrite(this->directionA, LOW);
   digitalWrite(this->directionB, LOW);
@@ -42,21 +47,19 @@ void Motor::updateDirectionPins() {
 
 void handleSpeedOverflow(int16_t &speed) {
   if (speed >= 127) {
-    printf("[Motor] [Warning] Exceeded max speed.\n");
     speed = 127;
   } else if (speed < -128) {
-    printf("[Motor] [Warning] Exceeded min speed.\n");
     speed = -128;
   }
 }
 
-void setDirectionFromSpeed(int8_t &speed, uint8_t &direction) {
+void setDirectionFromSpeed(int8_t &speed, uint8_t* direction) {
   if (speed > 0) {
-    direction = FORWARD;
+    *direction = FORWARD;
   } else if (speed < 0) {
-    direction = BACKWARD;
+    *direction = BACKWARD;
   } else {
-    direction = BRAKE;
+    *direction = BRAKE;
   }
 }
 
@@ -65,9 +68,9 @@ void Motor::setSpeed(int16_t speed) {
 
   int8_t finalSpeed = speed;
 
-  setDirectionFromSpeed(finalSpeed, this->direction);
+  setDirectionFromSpeed(finalSpeed, &this->direction);
 
-  this->curSpeed = finalSpeed;
+  this->curSpeed = finalSpeed * 8;
 
   updateDirectionPins();
 }
