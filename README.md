@@ -1,7 +1,31 @@
 # duck-rc
 
-## Como executar
+## Resumo
+<div align="justify">
+O projeto consiste em construir um carro operado por controle remoto (DualShock 4) onde a comunicação será feita via Wi-Fi. O sistema será embarcado utilizando uma Raspberry Pi, com os dados enviados a partir de um computador utilizando a framework ROS.
+</div>
 
+## Descrição Completa
+<div align="justify">
+  A ideia principal deste projeto se baseia na construção de um carrinho que é controlado remotamente através de um controle de PlayStation 4 - DualShock 4. A comunicação é feita via Wi-Fi, com os dados do controle sendo coletados e processados por um computador externo ao sistema do carrinho. O framework ROS - Robot Operating System é utilizado para desenvolvimento do código referente a parte de comunicação e processamento de dados que o carro utiliza. ROS é uma framework que viabiliza a comunicação entre diferentes dispositivos por meio de um protocolo de comunicação padronizado, além de disponibilizar, em alguns casos, bibliotecas parcialmente prontas para o desenvolvimento. O funcionamento do sistema como um todo é modelado usando um grafo, no qual cada nó é um componente separado e as arestas representam o fluxo de dados dentro desse sistema:
+</div>
+
+// colocar esquema do ROS
+
+<div align="justify">
+  Da estrutura e funcionamento geral do robô, o ponto principal é a Raspberry, encarregada da comunicação com o computador externo e também do controle geral do carro. A escolha da Raspberry é adequada à medida que ela possui um poder de processamento adequado para o problema, além de possuir conectividade direta via Wi-Fi, conforme necessário a partir das especificações iniciais do projeto. Conforme detectado experimentalmente, a interface GPIO da Raspberry não é adequada para o controle dos motores - dessa forma, foi decidido usar um Arduino Mega 2560.
+
+  Além disso, a escolha dos componentes também é indissociável do projeto “principal” a ser desenvolvido futuramente (embora ele fuja do escopo desta disciplina) - que é, também, um projeto de conclusão de curso. O objetivo final do projeto é desenvolver um carro autônomo em miniatura para participação na Duckietown - uma competição focada na área de inteligência artificial aplicada. Dessa forma, este projeto é, na verdade, uma etapa intermediária em direção ao projeto final.
+  
+  O robô construido possui dois andares - o superior, que abriga o Arduino Mega, a H-Bridge e alguns fios ligados a uma mini protoboard, e o inferior, que leva a Raspberry, a bateria Li-Po e os motores. Com isso, é possível otimizar o espaço e realizar um projeto simplificado e mais organizado quando comparado com um robô com um único andar.
+  
+  Para realizar a comunicação entre a Raspberry e o Arduino Mega, utilizou-se um cabo USB da Raspberry para o Arduino. Dessa forma, o Arduino pode ler tudo que a Raspberry escreve na porta serial e interpretar o que estiver escrito como informações do que fazer com os motores. A ligação dos pinos de controle do Arduino com a H-Bridge é responsável por distribuir a potência dos motores e controlar a direção final que o carrinho deve ir.
+</div>
+
+// infográfico de como funciona os eixos, a potencia, etc
+
+## Como executar
+<div align="justify">
 Seja a máquina com o controle *Dualshock* conectado a máquina *host* e a Raspberry Pi a máquina *client*.
 
 Os passos 1 e 3 são necessários apenas na primeira vez que o projeto for executado. 
@@ -13,3 +37,7 @@ Os passos 1 e 3 são necessários apenas na primeira vez que o projeto for execu
 
 Nesse ponto, o robô deve se mover ao usar o controle.
 Observação: ocasionalmente pode ser necessário que a raspberry execute um comando de leitura constante da porta serial associada. Para isso, em um outro terminal, execute `tail -F /dev/ttyACM0` - assumindo que a porta serial em questão é a `ttyACM0`.
+</div>
+  
+## Outros Esquemáticos
+// colocar outros esquemáticos interessantes
