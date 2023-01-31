@@ -51,4 +51,5 @@ O esquemático abaixo mostra os eixos assumidos pelo sistema no código. Note qu
 ![Eixos assumidos do robô](/docs/imgs/eixos_robo.png)
 
 Por fim, o esquemático fisico simplificado:
+
 ![Esquemático físico](/docs/imgs/esquematico_fisico.png)
