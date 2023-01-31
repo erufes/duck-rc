@@ -10,8 +10,11 @@ O projeto consiste em construir um carro operado por controle remoto (DualShock 
   A ideia principal deste projeto se baseia na construção de um carrinho que é controlado remotamente através de um controle de PlayStation 4 - DualShock 4. A comunicação é feita via Wi-Fi, com os dados do controle sendo coletados e processados por um computador externo ao sistema do carrinho. O framework ROS - Robot Operating System é utilizado para desenvolvimento do código referente a parte de comunicação e processamento de dados que o carro utiliza. ROS é uma framework que viabiliza a comunicação entre diferentes dispositivos por meio de um protocolo de comunicação padronizado, além de disponibilizar, em alguns casos, bibliotecas parcialmente prontas para o desenvolvimento. O funcionamento do sistema como um todo é modelado usando um grafo, no qual cada nó é um componente separado e as arestas representam o fluxo de dados dentro desse sistema:
 </div>
 
-// colocar esquema do ROS
+<div align="center">
 
+![Esquemático de ROS do robô](/docs/imgs/esquematico_ros.png)
+
+</div>
 <div align="justify">
   Da estrutura e funcionamento geral do robô, o ponto principal é a Raspberry, encarregada da comunicação com o computador externo e também do controle geral do carro. A escolha da Raspberry é adequada à medida que ela possui um poder de processamento adequado para o problema, além de possuir conectividade direta via Wi-Fi, conforme necessário a partir das especificações iniciais do projeto. Conforme detectado experimentalmente, a interface GPIO da Raspberry não é adequada para o controle dos motores - dessa forma, foi decidido usar um Arduino Mega 2560.
 
@@ -23,6 +26,8 @@ O projeto consiste em construir um carro operado por controle remoto (DualShock 
 </div>
 
 // infográfico de como funciona os eixos, a potencia, etc
+
+![Curva de resposta dos motores](/docs/imgs/diagrama_resposta.png)
 
 ## Como executar
 <div align="justify">
@@ -40,4 +45,7 @@ Observação: ocasionalmente pode ser necessário que a raspberry execute um com
 </div>
   
 ## Outros Esquemáticos
-// colocar outros esquemáticos interessantes
+
+O esquemático abaixo mostra os eixos assumidos pelo sistema no código. Note que isso implica em uma transformação linear dos dados recebidos do controle, que mapeiam aceleração de -2 a 2 no eixo x, em uma aceleração de -1 a 1 no eixo y, dentre outros ajustes necessários.
+
+![Eixos assumidos do robô](/docs/imgs/eixos_robo.png)
