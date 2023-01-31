@@ -1,6 +1,4 @@
 #include <Arduino.h>
-// #include <ArduinoJson.h>
-// #include "../ArduinoJson/src/ArduinoJson.h"
 #include "ArduinoJson.h"
 #include <motor.h>
 
@@ -11,22 +9,20 @@ Motor *mLeft, *mRight;
 
 float lerp(float a, float b, float f) { return a * (1.0 - f) + (b * f); }
 
-void setup() {
-  // put your setup code here, to run once:
+void setup() { 
   Serial.begin(9600);
   Serial.write("OK!\n");
   mLeft = new Motor(4, 5, 3);
   mRight = new Motor(6, 7, 8);
 }
 
-StaticJsonDocument<1024> doc;
+StaticJsonDocument<1024> doc; //declaration of the document that will be filled with the serial port data
 
-void loop() {
+void loop() { 
   delay(10);
   if(!Serial.available()) {
     return;
   }
-  Serial.println("loop");
   DeserializationError err = deserializeJson(doc, Serial);
 
   if (err == DeserializationError::Ok) {
@@ -34,45 +30,30 @@ void loop() {
     float ySpeed = doc[ACCEL_AXIS].as<float>();
     float lMult = 1, rMult = 1;
 
-    Serial.println("Y speed = " + String(ySpeed));
-
-    // Serial.println("xSpeed = " + String(xSpeed));
-
-    // if (xSpeed < 0) {
-    //   Serial.println("[Left]");
-    // } else if (xSpeed > 0) {
-    //   Serial.println("[Right]");
-    // } else {
-    //   Serial.println("[Straight]");
-    // }
-
-    if (xSpeed < 0) {
+    /*
+    calculates the multiplier to be passed to each engine based on the ratio between the
+    acceleration on the y-axis (coming from pressing the trigger R2 of the DS4) and direction pointed in the
+    x-axis (coming from DSR L3 analogue movement)
+    */ 
+    if (xSpeed < 0) { //L3 is being moved to the left
       lMult = 1 - abs(xSpeed);
     } else {
       lMult = 1;
     }
 
-    if (xSpeed > 0) {
+    if (xSpeed > 0) { //L3 is being moved to the right
       rMult = 1 - abs(xSpeed);
     } else {
       rMult = 1;
     }
 
-    // Serial.println("lMult = " + String(lMult));
-    // Serial.println("rMult = " + String(rMult));
-    // Serial.println("left = " + String(ySpeed * 127 * lMult));
-    // Serial.println("right = " + String(ySpeed * 127 * rMult));
-
-    mLeft->setSpeed(ySpeed * 127 * lMult);
+    //sets the speed of each engine with their respectives multipliers
+    mLeft->setSpeed(ySpeed * 127 * lMult); 
     mRight->setSpeed(ySpeed * 127 * rMult);
 
-    Serial.println("---------------------------");
   } else {
-    // erro
     Serial.print("deserializeJson() returned ");
     Serial.println(err.c_str());
-    // while (Serial.available() > 0)
-    //   Serial.read();
   }
 
   mLeft->tick();

@@ -30,7 +30,6 @@ class DS4Subscriber(Node):
                 self.get_logger().info('[ERROR] Serial port is not open')
         except:
             self.get_logger().error('Timed out')
-        # self._serial.close()
 
     def close_serial(self):
         self._serial.close()
