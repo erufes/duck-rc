@@ -49,3 +49,6 @@ Observação: ocasionalmente pode ser necessário que a raspberry execute um com
 O esquemático abaixo mostra os eixos assumidos pelo sistema no código. Note que isso implica em uma transformação linear dos dados recebidos do controle, que mapeiam aceleração de -2 a 2 no eixo x, em uma aceleração de -1 a 1 no eixo y, dentre outros ajustes necessários.
 
 ![Eixos assumidos do robô](/docs/imgs/eixos_robo.png)
+
+Por fim, o esquemático fisico simplificado:
+![Esquemático físico completo](/docs/images/esquematico_fisico.png)
